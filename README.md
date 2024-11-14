@@ -153,4 +153,4 @@ public class CaiwuController {
 ![desc](https://img-blog.csdnimg.cn/img_convert/20f9c1b4eea111583aecbd26f8e445c9.png)
 ## 六、 [更多好项目1](https://blog.csdn.net/weixin_42182741/article/details/143714650)，[更多好项目2](https://blog.csdn.net/weixin_42182741/article/details/143715759)
 
-## 七、感谢大家的点赞和转发，跟多优质项目将会和大家一一分享，文章最后附上转自与于作者@毕设指导Martin
+## 七、感谢大家的点赞和转发，跟多优质项目将会和大家一一分享
