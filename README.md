@@ -26,8 +26,10 @@ Maven包：Maven
 
 房屋租赁管理系统管理系统根据使用权限的角度进行功能分析，并运用用例图来展示各个权限需要操作的功能。
 
-图4.1即为设计的管理员功能结构，管理员权限操作的功能包括管理公告，管理房屋租赁管理系统信息，包括房源管理，报修管理，报修管理，公告管理等，可以管理投诉建议。  
-![desc](https://img-blog.csdnimg.cn/img_convert/be7b8b7d1bcf1a1fed636c5496cea38a.png)
+图4.1即为设计的管理员功能结构，管理员权限操作的功能包括管理公告，管理房屋租赁管理系统信息，包括房源管理，报修管理，报修管理，公告管理等，可以管理投诉建议。
+  
+![输入图片说明](1.png)
+
 
 图4.1 管理员功能结构
 
@@ -144,13 +146,13 @@ public class CaiwuController {
 
 ## 五、效果图
 
-![desc](https://img-blog.csdnimg.cn/img_convert/261106d106062e3de299518ad6d8123e.png)
-![desc](https://img-blog.csdnimg.cn/img_convert/f5d5f7c957042dc7fcba6768ebdbfd47.png)
-![desc](https://img-blog.csdnimg.cn/img_convert/6309c08b96161f1a320f1b58f9f87a4e.png)
-![desc](https://img-blog.csdnimg.cn/img_convert/4ac7ec8d1046bf43afaedadf10b969f1.png)
-![desc](https://img-blog.csdnimg.cn/img_convert/40147b7d4862cbac4fe7e5fb5659ad37.png)
-![desc](https://img-blog.csdnimg.cn/img_convert/da53532fd22f192a1124c134cde386f6.png)
-![desc](https://img-blog.csdnimg.cn/img_convert/20f9c1b4eea111583aecbd26f8e445c9.png)
+![输入图片说明](2.png)
+![输入图片说明](3.png)
+![输入图片说明](4.png)
+![输入图片说明](5.png)
+![输入图片说明](6.png)
+![输入图片说明](7.png)
+![输入图片说明](8.png)
 ## 六、 [更多好项目1](https://blog.csdn.net/weixin_42182741/article/details/143714650)，[更多好项目2](https://blog.csdn.net/weixin_42182741/article/details/143715759)
 
 ## 七、感谢大家的点赞和转发，跟多优质项目将会和大家一一分享
