@@ -1,39 +1,156 @@
-# 房屋租赁管理
+## 基于springboot的房屋租赁管理系统
 
-#### 介绍
-{**以下是 Gitee 平台说明，您可以替换此简介**
-Gitee 是 OSCHINA 推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用 Gitee 实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+* * *
 
-#### 软件架构
-软件架构说明
+## 一、项目介绍
 
+    
+房屋租赁管理系统管理系统按照操作主体分为管理员和用户。管理员的功能包括报修管理、字典管理、租房房源管理、租房评价管理、房源租赁管理、租房预约管理、论坛管理、公告管理、投诉建议管理、用户管理、租房合同管理、管理员管理。用户的功能等。该系统采用了Mysql数据库，Java语言，Spring Boot框架等技术进行编程实现。  
+房屋租赁管理系统管理系统可以提高房屋租赁管理系统信息管理问题的解决效率，优化房屋租赁管理系统信息处理流程，保证房屋租赁管理系统信息数据的安全，它是一个非常可靠，非常安全的应用程序。
 
-#### 安装教程
+关键词：房屋租赁管理系统管理系统；Mysql数据库；Java语言
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+## 二、开发环境
 
-#### 使用说明
+开发语言：Java  
+框架：springboot  
+JDK版本：JDK1.8  
+服务器：tomcat7  
+数据库：mysql  
+数据库工具：Navicat11  
+开发软件：eclipse/myeclipse/idea  
+Maven包：Maven  
+————————————————
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+## 三、功能介绍
 
-#### 参与贡献
+房屋租赁管理系统管理系统根据使用权限的角度进行功能分析，并运用用例图来展示各个权限需要操作的功能。
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+图4.1即为设计的管理员功能结构，管理员权限操作的功能包括管理公告，管理房屋租赁管理系统信息，包括房源管理，报修管理，报修管理，公告管理等，可以管理投诉建议。  
+![desc](https://img-blog.csdnimg.cn/img_convert/be7b8b7d1bcf1a1fed636c5496cea38a.png)
 
+图4.1 管理员功能结构
 
-#### 特技
+## 四、核心代码
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+部分代码：
+
+```c
+package com.example.controller;
+
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.crypto.SecureUtil;
+import com.example.common.Result;
+import com.example.common.ResultCode;
+import com.example.entity.Caiwu;
+import com.example.exception.CustomException;
+import com.example.service.CaiwuService;
+import com.example.utils.MapWrapperUtils;
+import com.example.utils.jwt.JwtUtil;
+import com.example.vo.CaiwuVo;
+import org.springframework.beans.BeanUtils;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@RequestMapping(value = "/caiwu")
+public class CaiwuController {
+
+    @Resource
+    private CaiwuService caiwuService;
+
+    @PostMapping
+    public Result<Caiwu> add(@RequestBody CaiwuVo caiwu) {
+        caiwuService.add(caiwu);
+           return Result.success(caiwu);
+    }
+	
+	
+
+    @PostMapping("/deleteList")
+    public Result<Caiwu> deleteList(@RequestBody CaiwuVo caiwu) {
+        caiwuService.deleteList(caiwu.getList());
+        return Result.success();
+    }
+
+    @DeleteMapping("/{id}")
+    public Result delete(@PathVariable Long id) {
+        caiwuService.delete(id);
+        return Result.success();
+    }
+
+    @PutMapping
+    public Result update(@RequestBody CaiwuVo caiwu) {
+        caiwuService.update(caiwu);
+        return Result.success();
+    }
+
+    @GetMapping("/{id}")
+    public Result<Caiwu> detail(@PathVariable Integer id) {
+        Caiwu caiwu = caiwuService.findById(id);
+        return Result.success(caiwu);
+    }
+
+    @GetMapping
+    public Result<List<Caiwu>> all() {
+        return Result.success(caiwuService.list());
+    }
+
+    @PostMapping("/page")
+    public Result<CaiwuVo> page(@RequestBody CaiwuVo caiwuVo) {
+        return Result.success(caiwuService.findPage(caiwuVo));
+    }
+	    @PostMapping("/login")
+    public Result login(@RequestBody Caiwu caiwu, HttpServletRequest request) {
+        if (StrUtil.isBlank(caiwu.getZhanghao()) || StrUtil.isBlank(caiwu.getMima())) {
+            throw new CustomException(ResultCode.PARAM_LOST_ERROR);
+        }
+        Caiwu login = caiwuService.login(caiwu);
+//        if(!login.getStatus()){
+//            return Result.error("1001","状态限制，无法登录系统");
+//        }
+        if(login != null) {
+            HashMap hashMap = new HashMap();
+            hashMap.put("user", login);
+            Map<String, Object> map = MapWrapperUtils.builder(MapWrapperUtils.KEY_USER_ID,caiwu.getId());
+            String token = JwtUtil.creatToken(map);
+            hashMap.put("token", token);
+            return Result.success(hashMap);
+        }else {
+            return Result.error();
+        }
+    }
+    @PutMapping("/updatePassword")
+    public Result updatePassword(@RequestBody Caiwu info, HttpServletRequest request) {
+        Caiwu caiwu = caiwuService.findById(info.getId());
+        String oldPassword = SecureUtil.md5(info.getMima());
+        if (!oldPassword.equals(caiwu.getMima())) {
+            return Result.error(ResultCode.PARAM_PASSWORD_ERROR.code, ResultCode.PARAM_PASSWORD_ERROR.msg);
+        }
+        info.setMima(SecureUtil.md5(info.getNewPassword()));
+        Caiwu caiwu1 = new Caiwu();
+        BeanUtils.copyProperties(info, caiwu1);
+        caiwuService.update(caiwu1);
+        return Result.success();
+    }
+}
+
+```
+
+## 五、效果图
+
+![desc](https://img-blog.csdnimg.cn/img_convert/261106d106062e3de299518ad6d8123e.png)
+![desc](https://img-blog.csdnimg.cn/img_convert/f5d5f7c957042dc7fcba6768ebdbfd47.png)
+![desc](https://img-blog.csdnimg.cn/img_convert/6309c08b96161f1a320f1b58f9f87a4e.png)
+![desc](https://img-blog.csdnimg.cn/img_convert/4ac7ec8d1046bf43afaedadf10b969f1.png)
+![desc](https://img-blog.csdnimg.cn/img_convert/40147b7d4862cbac4fe7e5fb5659ad37.png)
+![desc](https://img-blog.csdnimg.cn/img_convert/da53532fd22f192a1124c134cde386f6.png)
+![desc](https://img-blog.csdnimg.cn/img_convert/20f9c1b4eea111583aecbd26f8e445c9.png)
+## 六、 [更多好项目1](https://blog.csdn.net/weixin_42182741/article/details/143714650)，[更多好项目2](https://blog.csdn.net/weixin_42182741/article/details/143715759)
+
+## 七、感谢大家的点赞和转发，跟多优质项目将会和大家一一分享，文章最后附上转自与于作者@毕设指导Martin
