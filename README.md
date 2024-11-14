@@ -143,7 +143,6 @@ public class CaiwuController {
 ```
 
 ## 五、效果图
-![输入图片说明](https://img-blog.csdnimg.cn/img_convert/261106d106062e3de299518ad6d8123e.png)
 
 ![desc](https://img-blog.csdnimg.cn/img_convert/261106d106062e3de299518ad6d8123e.png)
 ![desc](https://img-blog.csdnimg.cn/img_convert/f5d5f7c957042dc7fcba6768ebdbfd47.png)
